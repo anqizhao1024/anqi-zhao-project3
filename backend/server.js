@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(urlencoded({extended: true}));
 
-let frontend_dir = path.join(__dirname, '..', 'frontend', 'public')
+let frontend_dir = path.join(__dirname, 'build')
 app.use(express.static(frontend_dir));
 
 app.use('/user', userRouter);
@@ -30,10 +30,9 @@ mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true})
 
 
 app.get('*', function (req, res) {
-    console.log("received request");
     res.sendFile(path.join(frontend_dir, "index.html"));
 });
 
-app.listen(8080, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log('Server running on port 8080');
 });

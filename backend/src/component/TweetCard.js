@@ -64,7 +64,7 @@ export default function TweetCard(props) {
                             sx={{width: '100%'}}
                         >
                             <Grid xs={0.5}>
-                                <Avatar alt={props.username} src="/static/images/avatar/1.jpg"/>
+                                <Avatar alt={props.username} src=""/>
                             </Grid>
                             <Grid xs={11.5}>
                                 <Item>

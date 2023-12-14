@@ -28,6 +28,7 @@ export default function LoginNav() {
 
     const handleLogout = () => {
         dispatch(logOut())
+        window.location.reload();
     }
 
     return (
@@ -59,7 +60,7 @@ export default function LoginNav() {
 
             </div>
             <div style={{textAlign: "center", marginTop: "5px", marginBottom: "5px"}} onClick={handleGoToProfile}>
-                <Avatar alt={username} src="/static/images/avatar/1.jpg"/>
+                <Avatar alt={username} src=""/>
             </div>
         </div>
     );

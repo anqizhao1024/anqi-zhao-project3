@@ -32,19 +32,25 @@ export default function SignUp() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        axios.post(apiPrefix + 'user/signup', {
-            username: data.get('username'),
-            password: data.get('password'),
-            displayName: data.get('displayName'),
-        })
-            .then(response => {
-                dispatch(login(data.get('username')))
-                navigate("/")
+        let username = data.get('username')
+        if (username.split(' ').length > 1) {
+            setIsErrorModalOpen(true);
+            setErrMessage("username can't contain space")
+        } else {
+            axios.post(apiPrefix + 'user/signup', {
+                username: data.get('username'),
+                password: data.get('password'),
+                displayName: data.get('displayName'),
             })
-            .catch(error => {
-                setIsErrorModalOpen(true);
-                setErrMessage(error.response.data)
-            });
+                .then(response => {
+                    dispatch(login(data.get('username')))
+                    navigate("/")
+                })
+                .catch(error => {
+                    setIsErrorModalOpen(true);
+                    setErrMessage(error.response.data)
+                });
+        }
     };
     const handleErrorModalClose = () => {
         setIsErrorModalOpen(false)
